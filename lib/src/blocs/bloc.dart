@@ -20,4 +20,4 @@ class Bloc extends Object with Validators {
   }
 }
 
-final bloc = Bloc();
+// final bloc = Bloc(); Single global instance approach
