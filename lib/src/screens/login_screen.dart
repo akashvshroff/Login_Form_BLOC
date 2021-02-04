@@ -5,13 +5,13 @@ import '../blocs/provider.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
+    final bloc = Provider.of(context); //scoped approach
 
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          emailField(bloc),
+          emailField(bloc), //field required for scoped approach
           passwordField(bloc),
           SizedBox(
             height: 10.0,
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget emailField(Bloc bloc) {
+  Widget emailField([Bloc bloc]) {
     return StreamBuilder(
         stream: bloc.email,
         builder: (context, snapshot) {
@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget passwordField(Bloc bloc) {
+  Widget passwordField([Bloc bloc]) {
     return StreamBuilder(
         stream: bloc.password,
         builder: (context, snapshot) {
