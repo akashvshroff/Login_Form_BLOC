@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          submitButton(),
+          submitButton(bloc),
         ],
       ),
     );
@@ -54,17 +54,26 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget submitButton() {
-    return RaisedButton(
-      onPressed: null,
-      color: Colors.blue,
-      child: Text(
-        'SUBMIT',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+  Widget submitButton(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.submitValid,
+      builder: (context, snapshot) {
+        return RaisedButton(
+          onPressed: snapshot.hasError
+              ? null
+              : () {
+                  print('Saving values.');
+                },
+          color: Colors.blue,
+          child: Text(
+            'SUBMIT',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      },
     );
   }
 }
