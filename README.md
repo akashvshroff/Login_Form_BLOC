@@ -23,4 +23,16 @@
 - While the framework is quite easy to understand, the code in implementing the BLOC as well as connecting it to other facets of our project is slightly tricky, therefore I will also explain the BLOC class, the approaches at connecting the BLOC to the rest of our build and the role of RxDart. 
 
 ## BLOC Class:
-- The [BLOC class]() 
+- The [BLOC class]() is fairly straight-forward and as instance variables includes the three aforementioned Streams. These are initialised as BehaviorSubject<> which are essentially Streams with added functionality and are from the rxdart library. They work the same as Dart StreamControllers and have added functionality of saving the last value of the Stream. 
+    ```dart
+    final _emailController = BehaviorSubject<String>();
+    final _passwordController = BehaviorSubject<String>();
+    final _loginStateController = BehaviorSubject<bool>();
+    ```
+- There are getters that are used to quickly be able to access features of the BLOC class and abstract the lenghty process. Here, they're used to retrieve the sinks of the Streams (post validation if necessary) to add data as well as retrieve the Streams themselves. 
+- Furthermore, the rxdart combineLatest2 method is used to merge the results of the email and password field and are used in the StreamBuilder to determine when the submit button should be activated (explained later).
+- The submit method of the Bloc class is called by the submit button and extracts the values of the email, password and login state and displays them to the user to test whether the form is working. 
+- Ultimately a dispose method is included which closes all the different BehaviorSubjects. 
+
+## BLOC Implementation:
+- 
