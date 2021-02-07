@@ -26,7 +26,7 @@ class Bloc extends Object with Validators {
     final loginState = _loginStateController.value;
 
     print(
-        'Posting to API: $validEmail and $validPassword. Keep logged in: $loginState');
+        'Posting to API: $validEmail and $validPassword. Keep logged in: $loginState.');
   }
 
   void dispose() {
