@@ -23,7 +23,8 @@
 - While the framework is quite easy to understand, the code in implementing the BLOC as well as connecting it to other facets of our project is slightly tricky, therefore I will also explain the BLOC class, the approaches at connecting the BLOC to the rest of our build and the role of RxDart. 
 
 ## BLOC Class:
-- The [BLOC class]() is fairly straight-forward and as instance variables includes the three aforementioned Streams. These are initialised as BehaviorSubject<> which are essentially Streams with added functionality and are from the rxdart library. They work the same as Dart StreamControllers and have added functionality of saving the last value of the Stream. 
+- The [BLOC class](https://github.com/akashvshroff/Login_Form_BLOC/blob/master/lib/src/blocs/bloc.dart) is fairly straight-forward and as instance variables includes the three aforementioned Streams. These are initialised as BehaviorSubject<> which are essentially Streams with added functionality and are from the rxdart library. They work the same as Dart StreamControllers and have added functionality of saving the last value of the Stream. 
+
     ```dart
     final _emailController = BehaviorSubject<String>();
     final _passwordController = BehaviorSubject<String>();
@@ -35,4 +36,17 @@
 - Ultimately a dispose method is included which closes all the different BehaviorSubjects. 
 
 ## BLOC Implementation:
-- 
+- There are two ways to add a BLOC to the project - using the global approach and the scoped approach. 
+- The global approach is very simple and involves creating an object of the Bloc class in the same file, therefore all the other files that import this class get access to the bloc object. 
+- This method works only if the entire class can share the same data, otherwise the scoped approach where different instances are used for different parts of the class. 
+- Here, that function is done by the Provider class and can be read about in great details [here](https://www.didierboelens.com/2019/04/bloc-scopedmodel-redux-comparison/).
+
+## Project UI:
+- All the UI features are quite self-explanatory for the build but one idea that is everpresent is the use of the StreamBuilder. 
+- This StreamBuilder helps keep track of a stream that is assigned to it and whenever there is new data in the Stream, the function assigned to the builder property rebuilds and data about the new event in the Stream is passed to it via the snapshot property. This function returns the UI element (CheckBox or TextField) that we display to the users. 
+- Data is added to the respective Stream using the onChanged property of the fields. 
+
+## RxDart:
+- The rxdart library is wonderful when we are working with Streams as it provides added functionality on top of the competent Streams API. 
+- The combineLatest function is one such example where we can combine the results of the two Streams, here the email and password, and therefore use that to only allow the users to submit the form when both are valid and not errors. 
+- I urge you to read through the comprehensive rxdart documentation [here](https://pub.dev/documentation/rxdart/latest/).
