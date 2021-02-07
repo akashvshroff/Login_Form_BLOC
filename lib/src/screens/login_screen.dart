@@ -13,6 +13,7 @@ class LoginScreen extends StatelessWidget {
         children: <Widget>[
           emailField(bloc), //field required for scoped approach
           passwordField(bloc),
+          loginCheckbox(bloc),
           SizedBox(
             height: 10.0,
           ),
@@ -52,6 +53,19 @@ class LoginScreen extends StatelessWidget {
             ),
           );
         });
+  }
+
+  Widget loginCheckbox(bloc) {
+    return StreamBuilder(
+      stream: bloc.login,
+      builder: (context, snapshot) {
+        return CheckboxListTile(
+          title: Text("Keep me logged in."),
+          value: snapshot.data != null ? snapshot.data : false,
+          onChanged: bloc.changeLoginState,
+        );
+      },
+    );
   }
 
   Widget submitButton(Bloc bloc) {
